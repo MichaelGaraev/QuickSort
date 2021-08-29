@@ -1,0 +1,8 @@
+C:\Users\Михаил\source\repos\Sample-Test2\Debug\Sample-Test2.vcxproj.CopyComplete
+C:\Users\Михаил\source\repos\Sample-Test2\Debug\Sample-Test2.exe
+C:\Users\Михаил\source\repos\Sample-Test2\Debug\gtest.pdb
+C:\Users\Михаил\source\repos\Sample-Test2\Debug\gtest_main.pdb
+C:\dev\Quicksort\Debug\Sample-Test2.vcxproj.CopyComplete
+C:\dev\Quicksort\Debug\Sample-Test2.exe
+C:\dev\Quicksort\Debug\gtest.pdb
+C:\dev\Quicksort\Debug\gtest_main.pdb
