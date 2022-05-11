@@ -1,6 +1,2 @@
 ﻿  pch.cpp
-  test.cpp
-C:\dev\Quicksort\test.cpp(101,119): warning C4305: инициализация: усечение из "double" в "float"
-C:\dev\Quicksort\test.cpp(102,122): warning C4305: инициализация: усечение из "double" в "float"
-  LINK : отсутствует база данных C:\dev\Quicksort\Debug\Sample-Test2.pdb программы; выполняется полная компоновка
-  Sample-Test2.vcxproj -> C:\dev\Quicksort\Debug\Sample-Test2.exe
+C:\Dev\QuickSort\pch.h(8,10): fatal error C1083: Не удается открыть файл включение: gtest/gtest.h: No such file or directory,

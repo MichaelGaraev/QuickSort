@@ -1,0 +1,2 @@
+﻿  pch.cpp
+C:\Dev\QuickSort\pch.h(8,10): fatal error C1083: Не удается открыть файл включение: gtest/gtest.h: No such file or directory,
