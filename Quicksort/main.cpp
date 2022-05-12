@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
-#include "Quicksort.h"
+
+#include "quicksort.h"
 
 int main(int argc, char* argv[])
 {

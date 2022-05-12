@@ -1,124 +1,91 @@
-#pragma once
+#ifndef	QUICKSORT_H
+#define	QUICKSORT_H
 
+/**
+ * Compares elements of primary data types
+ * @param a - first element
+ * @param b - second element
+ * @return true if a < b
+ */
 const auto comparator_lambda = [](auto a, auto b) { return a < b; };
+
+/**
+ * Compares elements of primary data types in reverse order
+ * @param a - first element
+ * @param b - second element
+ * @return true if a > b
+ */
 const auto comparator_lambda_revers = [](auto a, auto b) { return a > b; };
 
-const int g_intersection = 13;
+/**
+ * Experimentally found interval length after which the sorting type changes
+ */
+const int g_sortIntersection = 13;
 
+/**
+ * Swap elements
+ * @tparam T - data type
+ * @param a - pointer to the first element
+ * @param b - pointer to the second element
+ */
 template<typename T>
 void swap(T* a, T* b);
 
-// First - is a first element of array
-// Last - is a last element of array
-// Comp - Type of comparator
+/**
+ * Function that selects the sort type.
+ * If the interval length is less than g_sortIntersection - use insertion sort,
+ * if the interval length is more than g_sortIntersection - use quick sort
+ * @tparam T - data type
+ * @param first - pointer to the first element of the sorted interval
+ * @param last - pointer to the second element of the sorted interval
+ * @param comp - comparison function
+ */
 template <typename T, typename Compare>
 void sort(T* first, T* last, Compare comp);
 
+/**
+ * Insertion sort
+ * @tparam T - data type
+ * @param first - pointer to the first element of the sorted interval
+ * @param last - pointer to the second element of the sorted interval
+ * @param comp - comparison function
+ */
 template <typename T, typename Compare>
 void insertion_sort(T* first, T* last, Compare comp);
 
+/**
+ * Returns the pivot element of the interval, 
+ * which is the median of the first, last, and middle elements of the interval
+ * @tparam T - data type
+ * @param first - pointer to the first element of the sorted interval
+ * @param last - pointer to the second element of the sorted interval
+ * @param comp - comparison function
+ */
 template <typename T, typename Compare>
 T pivot_find(T* first, T* last, Compare comp);
 
+/**
+ * Elements more than the pivot element are sent to the right interval,
+ * less than the reference - to the left
+ * @tparam T - data type
+ * @param first - pointer to the first element of the sorted interval
+ * @param last - pointer to the second element of the sorted interval
+ * @param pivot -pivot element
+ * @param comp - comparison function
+ */
 template <typename T, typename Compare>
 int partition(T* first, T* last, T pivot, Compare comp);
 
+/**
+ * Quick sort
+ * @tparam T - data type
+ * @param first - pointer to the first element of the sorted interval
+ * @param last - pointer to the second element of the sorted interval
+ * @param comp - comparison function
+ */
 template <typename T, typename Compare>
 void quick_sort(T* first, T* last, Compare comp);
 
+#include "quicksort_impl.h"
 
-template<typename T>
-void swap(T* a, T* b) {
-	T tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
-template <typename T, typename Compare>
-void sort(T* first, T* last, Compare comp)
-{
-	int len = (last - first) + 1;
-	if (len < 2) return;
-
-	if (len > g_intersection)
-	{
-		quick_sort(first, last, comp);
-	}
-	else
-	{
-		insertion_sort(first, last, comp);
-	}
-}
-
-template <typename T, typename Compare>
-void insertion_sort(T* first, T* last, Compare comp) 
-{
-	if (last - first < 1) return;
-	for (int i = 0; first + i < last; i++)
-	{
-		T temp = *(first + i + 1);
-		int j = i;
-		while (j >= 0 && comp(temp, *(first + j)))
-		{
-			*(first + j + 1) = *(first + j);
-			j--;
-		}
-		*(first + j + 1) = temp;
-	}
-}
-
-template <typename T, typename Compare>
-T pivot_find(T* first, T* last, Compare comp)
-{
-	T temp_array[3];
-	T* middle = first + (last - first) / 2;
-	temp_array[0] = *first;
-	temp_array[1] = *middle;
-	temp_array[2] = *last;
-	insertion_sort(temp_array, temp_array + 2, comp);
-	return temp_array[1];
-}
-
-template <typename T, typename Compare>
-int partition(T* first, T* last, T pivot, Compare comp)
-{
-	int len = (last - first) + 1;
-	int lo = 0;
-	int hi = len - 1;
-	while (lo < hi) {
-		if (first[lo] == first[hi])
-		{
-			lo++;
-		}
-		while (comp(first[lo], pivot))
-			lo++;
-		while (comp(pivot, first[hi]))
-			hi--;
-		if (lo < hi) {
-			swap(&first[lo], &first[hi]);
-		}
-
-	}
-	return hi;
-}
-
-template <typename T, typename Compare>
-void quick_sort(T* first, T* last, Compare comp)
-{
-	while (last - first > 0)
-	{
-		T pivot = pivot_find(first, last, comp);
-		int partition_id = partition(first, last, pivot, comp);
-
-		if (partition_id < (last - first) / 2)
-		{
-			sort(first, first + partition_id - 1, comp);
-			first = first + partition_id + 1;
-		}
-		else
-		{
-			sort(first + partition_id + 1, last, comp);
-			last = first + partition_id - 1;
-		}
-	}
-}
+#endif	QUICKSORT_H

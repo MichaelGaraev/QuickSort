@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "../Quicksort/Quicksort.h"
+#include "../Quicksort/quicksort.h"
 
 //  testing on 500 random int
 //  295 972 nanoseconds - this quicksort
